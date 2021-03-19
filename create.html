@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+    <script src="js/create_team.js" async></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+</head>
+<body>
+    <h1>CREATE TEAM</h1>
+    <input type="text" placeholder="Name Team" id="name"/></br>
+    <input type="file" id="photo" name="userfile"/></br>
+    <button onclick="createTeam()" id="createTeam">Create</button></br>
+    <button onclick="deleteTeam()" id="deleteTeam">Delete</button></br>
+    <button onclick="updateTeam()" id="updateTeam">Update</button></br>
+    
+</body>
+</html>

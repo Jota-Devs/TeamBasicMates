@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+    <script src="js/create_team.js" async></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+</head>
+
+<body>
+    <h1>CRUD ACC</h1>
+    
+    <input type="number" name="team" id="team" placeholder="teamID"></br>
+    <select>
+        <option value=”enabled”>enabled</option>
+        <option value=”disabled”>disabled</option>
+    </select></br>
+    <input type="text" placeholder="Name Team" id="name"/></br>
+    <input type="file" id="photo" name="userfile"/></br>
+    <button onclick="createAcc()" id="createAcc">Create</button></br>
+    <button onclick="deleteAcc()" id="deleteAcc">Delete</button></br>
+    <button onclick="updateAcc()" id="updateAcc">Update</button></br>
+    
+
+</body>
+
+</html>
