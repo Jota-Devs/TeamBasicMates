@@ -10,9 +10,9 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+    <script src="js/config.js" async></script>
     <script src="js/get_all_teams.js" async></script>
-    
-   ​
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <style>
         .contenedor {
@@ -22,7 +22,8 @@
             width: 100%;
             text-align: center;
         }
-        .thumbnails{
+
+        .thumbnails {
             width: 20%;
             opacity: 0.5;
         }
@@ -31,11 +32,12 @@
             width: 100%;
             display: block;
         }
-        
 
-        .disabled{
+
+        .disabled {
             filter: grayscale(100%);
         }
+
         .logo {
             position: absolute;
             top: 50%;
@@ -46,10 +48,10 @@
             z-index: -1;
         }
 
-        .tarjeta{
-            position: absolute;
+        .tarjeta {
+            position: fixed;
             width: 100%;
-            max-width: 600px;
+            max-width: 260px;
             min-height: 300px;
             top: -100%;
             left: 50%;
@@ -59,11 +61,81 @@
             transition: .3s all;
             box-shadow: 0 0 3px #333;
         }
-        .tarjeta.activa{
-            top:50%;
+
+        .tarjeta.activa {
+            top: 50%;
             opacity: 1;
         }
 
+        .card {
+            text-align: center;
+            padding-top: 10px;
+
+        }
+
+        .cardPhoto {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 100px;
+            border-radius: 50%;
+            padding-bottom: 20px;
+        }
+
+
+        ul {
+            overflow: auto;
+            text-align: center;
+        }
+
+        ul li {
+            list-style-type: none;
+            float: left;
+            float: inline-start;
+
+        }
+
+        ul li a i {
+            background: #205D7A;
+            color: #fff;
+            width: 45px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 30px;
+            margin-right: 20px;
+            padding-top: 6px;
+        }
+
+        .fa-facebook {
+            background: #3b5998;
+        }
+
+        .fa-linkedin {
+            background: #007bb6
+        }
+
+        .fa-twitter {
+            background: #00aced
+        }
+
+
+        ul li a i {
+            transition: all 0.2s ease-in-out;
+        }
+
+        ul li a i:hover {
+            opacity: .7;
+        }
+
+        #close {
+            text-align: center;
+            background-color: red;
+            color: #fff;
+            width: 10px;
+            float: right;
+            margin-right: 1px;
+            font-size: 10px;
+        }
     </style>
 </head>
 
@@ -72,9 +144,11 @@
     </div>
 
     <div class="tarjeta" id="tarjeta">
-        <div id="close">X</div>
+        <div id="close">X </div>
+        <div id="tarjeta-contenido"></div>
+        <div id="social"></div>
     </div>
-    
+
 </body>
 
 </html>

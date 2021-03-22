@@ -10,6 +10,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+    <script src="js/config.js" async></script>
     <script src="js/index.js" async></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 </head>
@@ -17,23 +18,19 @@
 <body>
     <div class="box">
         <h1 class="title is-1">Login</h1>
-        <!--<input type="text" placeholder="email.." id="email" /></br>
-    <input type="password" placeholder="password" id="password" /></br>
-    <button onclick="login()" id="login" class="button is-small is-primary is-outlined">Login</button></br> -->
 
-        <!--LOGIN -->
         <div class="box">
             <div class="field">
                 <label class="label">Email</label>
                 <div class="control">
-                    <input class="input" type="text" placeholder="e.g. juan@tcs.com" id="email" />
+                    <input class="input" type="text" placeholder="e.g. juan@tcs.com" id="email" value="juandi.ffvii@hotmail.com" />
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control">
-                    <input class="input" type="password" placeholder="********" id="password" />
+                    <input class="input" type="password" placeholder="********" id="password" value="Juan1234" />
                 </div>
             </div>
             <input type="submit" onclick="login()" value="Login" class="button is-small is-primary is-outlined">

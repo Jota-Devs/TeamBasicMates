@@ -1,4 +1,4 @@
-  const firebaseConfig = {
+  /*const firebaseConfig = {
     apiKey: "AIzaSyDJAMhgO6h-3pFQhu76vdGIEvDdM-sJq7Y",
     authDomain: "teammatejd.firebaseapp.com",
     databaseURL: "https://teammatejd-default-rtdb.firebaseio.com/",
@@ -8,7 +8,7 @@
     appId: "1:121773687334:web:02d6512e0ab9cb7c2f5ce7"
   };
 
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig);*/
   //////////////////////////////////////////////////////
   const auth = firebase.auth();
 
@@ -22,7 +22,7 @@
         let user = userCredential.user;
         alert("New Account : " + user.email);
         cleanText();
-        window.location = 'http://127.0.0.1:5500/home.html?user=' + user.email + '';
+        window.location = '/home.html?user=' + user.email + '';
       })
       .catch((e) => {
         alert(e.message);
@@ -38,7 +38,9 @@
         let user = userCredential.user;
         alert("Account logued : " + user.email);
         cleanText();
-        window.location = 'http://127.0.0.1:5500/home.html?user=' + user.email + '';
+        document.cookie = "username=" + email;
+        window.location = '/home.html';
+       // window.location = '/home.html?user=' + user.email + '';
       })
       .catch((e) => {
         alert(e.message);
