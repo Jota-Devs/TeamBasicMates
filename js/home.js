@@ -1,22 +1,9 @@
-//const urlParams = new URLSearchParams(window.location.search);
-//const email = urlParams.get('user');
+
 let userCookie = document.cookie.split(';');
 let emailCookie = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 //saludo
 document.getElementById("welcome").innerHTML = "Welcome to your Home Page " + emailCookie;
 
-/*const firebaseConfig = {
-    apiKey: "AIzaSyDJAMhgO6h-3pFQhu76vdGIEvDdM-sJq7Y",
-    authDomain: "teammatejd.firebaseapp.com",
-    databaseURL: "https://teammatejd-default-rtdb.firebaseio.com/",
-    projectId: "teammatejd",
-    storageBucket: "teammatejd.appspot.com",
-    messagingSenderId: "121773687334",
-    appId: "1:121773687334:web:02d6512e0ab9cb7c2f5ce7"
-};
-
-firebase.initializeApp(firebaseConfig);*/
-/////////////////////////
 var data = firebase.database().ref('accounts/');
 
 //obtengo team

@@ -7,11 +7,13 @@
     <title>Create</title>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
-    <script src="js/create_team.js" async></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
+    <script src="js/config.js" async></script>
+    <script src="js/create_team.js" async></script>
 </head>
 <body>
     <h1>CREATE TEAM</h1>
+    <input type="text" placeholder="ID Team" id="idTeam"/></br>
     <input type="text" placeholder="Name Team" id="name"/></br>
     <input type="file" id="photo" name="userfile"/></br>
     <button onclick="createTeam()" id="createTeam">Create</button></br>
