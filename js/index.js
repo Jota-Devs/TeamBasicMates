@@ -6,7 +6,7 @@
     auth.createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         let user = userCredential.user;
-        alert("New Account : " + user.email);
+        //alert("New Account : " + user.email);
         cleanText();
         document.cookie = "username=" + email;
         window.location = '/home.html';
@@ -23,7 +23,7 @@
     auth.signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         let user = userCredential.user;
-        alert("Account logued : " + user.email);
+        //alert("Account logued : " + user.email);
         cleanText();
         document.cookie = "username=" + email;
         window.location = '/home.html';

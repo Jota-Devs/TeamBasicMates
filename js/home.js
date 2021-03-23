@@ -1,10 +1,42 @@
-
 let userCookie = document.cookie.split(';');
 let emailCookie = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-//saludo
-document.getElementById("welcome").innerHTML = "Welcome to your Home Page " + emailCookie;
 
-var data = firebase.database().ref('accounts/');
+const db = firebase.firestore();
+
+let user;
+const getUser = () => {
+    db.collection("Profiles").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            if (doc.data().username == emailCookie) {
+                user = doc.data();
+                document.getElementById("welcome").innerHTML = "Welcome to your Home Page " + user.username;
+                getTeamsIOwn(user);
+            } else {
+                alert('error usuario no existe');
+            }
+        });
+    });
+};
+getUser();
+
+const getTeamsIOwn = (user) => {
+    db.collection("Teams").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            doc.data().owner.get().then(res => {
+                if (res.data().username == user.username) {
+                    var element = document.createElement("div");
+                    document.getElementById('thumbnails').appendChild(element);
+                    element.innerHTML += "<a href ='/get_all_teams.html?id=" + doc.id + " ' ><img src=" + doc.data().photo + " class='images'></a>";
+                }
+            });
+        });
+    });
+};
+
+
+
+
+/*var data = firebase.database().ref('accounts/');
 
 //obtengo team
 function getTeams() {
@@ -28,3 +60,4 @@ function getTeams() {
     });
 }
 getTeams();
+*/
