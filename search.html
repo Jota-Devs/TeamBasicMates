@@ -8,7 +8,7 @@
     <title>Search</title>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
-    
+
     <script src="/js/config.js"></script>
     <script src="/js/search.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -61,32 +61,35 @@
                     <button class="button is-link" onclick="searchTeam()">Search</button>
                 </div>
                 <!--endSearch-->
-
-                <!--this need to be autocreated-->
-                <div class="notification block">
-                    <div class="media">
-                        <div class="media-left">
-                            <figure class="image is-96x96">
-                                <img
-                                    src="https://media-exp1.licdn.com/dms/image/C4E0BAQHHJDOW63CR7w/company-logo_200_200/0/1585931222268?e=2159024400&v=beta&t=yveBZeWusUYS3EOOIAMV1sO4EDuNQ85V3rXtDdYj8qY">
-                            </figure>
-                        </div>
-                        <div class="content column">
-                            <p>
-                                <strong>HUMANA</strong>
-                                <br>
-                                A short description of this group should be included here.<br>
-                                Created: May 2021<br>
-                                Total Members: 320
-                            </p>
-                        </div>
-                        <div class="media-right">
-                            <button class="button is-success" id="2" style="width: 100px;" onclick="goToTeam(this.id)" >GO</button>
+                <div id='cards'>
+                    <!--this need to be autocreated
+                    <div class="notification block">
+                        <div class="media">
+                            <div class="media-left">
+                                <figure class="image is-96x96">
+                                    <img
+                                        src="https://media-exp1.licdn.com/dms/image/C4E0BAQHHJDOW63CR7w/company-logo_200_200/0/1585931222268?e=2159024400&v=beta&t=yveBZeWusUYS3EOOIAMV1sO4EDuNQ85V3rXtDdYj8qY">
+                                </figure>
+                            </div>
+                            <div class="content column">
+                                <p>
+                                    <strong>HUMANA</strong>
+                                    <br>
+                                    A short description of this group should be included here.<br>
+                                    Created: May 2021<br>
+                                    Total Members: 320
+                                </p>
+                            </div>
+                            <div class="media-right">
+                                <button class="button is-success" id="2" style="width: 100px;"
+                                    onclick="goToTeam(this.id)">GO</button>
+                            </div>
                         </div>
                     </div>
+                    -->
                 </div>
-                <!--endcard-->
-            
+
+
             </div>
         </div>
     </div>

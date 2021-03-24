@@ -9,31 +9,47 @@ const getUser = () => {
         querySnapshot.forEach((doc) => {
             if (doc.data().username == emailCookie) {
                 user = doc.data();
-                document.getElementById("welcome").innerHTML = "Welcome to your Home Page " + user.username;
+                document.getElementById("welcome").innerHTML = "Welcome, " + user.fullName;
                 getTeamsIOwn(user);
-            } else {
-                alert('error usuario no existe');
-            }
+                getTeamsIPartOf(user);
+            }; 
         });
     });
 };
 getUser();
 
 const getTeamsIOwn = (user) => {
+    var element = document.createElement("div");
+    document.getElementById('thumbnails').appendChild(element);
+    element.className='columns'
+
     db.collection("Teams").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             doc.data().owner.get().then(res => {
                 if (res.data().username == user.username) {
-                    var element = document.createElement("div");
-                    document.getElementById('thumbnails').appendChild(element);
-                    element.innerHTML += "<a href ='/get_all_teams.html?id=" + doc.id + " ' ><img src=" + doc.data().photo + " class='images'></a>";
+                    element.innerHTML += "<a href ='/get_all_teams.html?id=" + doc.id + " ' ><img src=" + doc.data().photo + " class='images column'></a>";
                 }
             });
         });
     });
 };
 
+const getTeamsIPartOf = (user) =>{
+    var element = document.createElement("div");
+        document.getElementById('thumbnails2').appendChild(element);
+        element.className='columns'
+        user.teams.forEach((doc) => {
+            doc.get().then(res =>{
+                console.log(res.data()); 
+                    element.innerHTML += "<a href ='/get_all_teams.html?id=" + res.id + " ' ><img src=" + res.data().photo + " class='images column'></a>"; 
+            })
+        });
 
+}
+
+const createTeam = () =>{
+    window.location = '/create.html';
+}
 
 
 /*var data = firebase.database().ref('accounts/');

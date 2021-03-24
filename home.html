@@ -28,8 +28,32 @@
             </a>
         </div>
     </nav>
-    <h1 id='welcome'></h1>
-    <div id='thumbnails'>
+    <h1 id='welcome'></h1> 
+    
+    <div class="block"><button class="delete is-large" style="transform: rotate(45deg)" onclick="createTeam()"></button> CREATE A TEAM</div>
+    <div class="columns">
+        <!--own-->
+        <div class="column">
+            <div class="notification block">
+                <div class="box">
+                    <h3>Teams that I own..</h3>
+                    <div id='thumbnails'></div>
+                </div>
+            </div>
+        </div>
+        <!--end own-->
+        
+        <!--part of-->
+        <div class="column">
+            <div class="notification block">
+                <div class="box">
+                    <h3>Teams that I part of..</h3>
+                    <div id='thumbnails2'></div>
+                </div>
+            </div>
+        </div>
+        <!--end part of-->
+
 
     </div>
 
