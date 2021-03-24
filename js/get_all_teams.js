@@ -5,7 +5,6 @@ exit.addEventListener('click', closeCard);
 const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 //list of team
-let arr = [];
 const db = firebase.firestore();
 document.querySelector('#lc').innerHTML = '';
 
@@ -13,12 +12,15 @@ const listTeamMembers = () => {
     db.doc('Teams/' + id).get().then((doc) => {
         doc.data().teamMembers.forEach(res => {
             res.get().then(x => {
-                arr.push(x.data());
                 let element = document.createElement("div");
                 document.getElementById('lc').appendChild(element);
-                console.log(x.data());
                 element.dataset.account = x.data().username;
                 element.className = "thumbnails";
+                //fix
+                thumbnails = document.querySelectorAll('.thumbnails');
+                thumbnails.forEach(function (thumbnail) {
+                    thumbnail.addEventListener('click', openCard);
+                });
                 if (x.data().status == "enabled") {
                     element.innerHTML += "<img src=" + x.data().photo + " class='images '>";
                 } else {
@@ -26,19 +28,21 @@ const listTeamMembers = () => {
                 }
             });
         });
-        //populatePage();
+        var imag = doc.data().photo;
+        let logo = document.createElement("div");
+        document.getElementById('lc').appendChild(logo);;
+        
+        logo.innerHTML += "<img src=" + imag + " class='logo'>"    
     });
+};
 
-}
+listTeamMembers();
 /*const populatePage = () => {
-    console.log(arr);
-    console.log(arr);
-    arr.forEach(x => console.log(x));
+
+   
     arr.forEach(item => {
-        console.log(arr);
         let element = document.createElement("div");
         document.getElementById('lc').appendChild(element);
-        console.log(item);
         element.dataset.account = item.username;
         element.className = "thumbnails";
         if (item.status == "enabled") {
@@ -54,14 +58,13 @@ const listTeamMembers = () => {
         document.getElementById('lc').appendChild(logo);;
     
         logo.innerHTML += "<img src=" + imag + " class='logo'>";
-    });*/
+    });
     thumbnails = document.querySelectorAll('.thumbnails');
 
     thumbnails.forEach(function (thumbnail) {
         thumbnail.addEventListener('click', openCard);
-    });
+    });*/
 
-listTeamMembers();
 
 /*let list = firebase.database().ref('accounts');
 const data = firebase.database().ref('accounts/');
@@ -80,13 +83,22 @@ function openCard(e) {
     const card = document.querySelector('.tarjeta');
     const email = e.target.parentElement.dataset.account;
     card.classList.add('activa');
+    db.collection("Profiles").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            if (doc.data().username == email) {
+                user = doc.data();
+                addContentToCard(user);
+            }
+        });
+    });
 
-    data.orderByChild('username').equalTo(email).on('value', snapshot => {
+
+   /* data.orderByChild('username').equalTo(email).on('value', snapshot => {
         snapshot.forEach(function (childSnapshot) {
             var value = childSnapshot.val();
             addContentToCard(value);
         });
-    });
+    });*/
 };
 
 function closeCard(e) {
