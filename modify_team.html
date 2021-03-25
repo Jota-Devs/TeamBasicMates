@@ -5,15 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create</title>
+    <title>Document</title>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-storage.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
-    <script src="js/config.js" async></script>
-    <script src="js/create_team.js" async></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-
+    <script src="js/config.js" async></script>
+    <script src="js/modify_team.js" async></script>
 </head>
 
 <body>
@@ -26,14 +23,21 @@
     </nav>
     <div class="hero">
         <div class="hero-body">
-            <input type="text" placeholder="A team name here.." id="name" class="input box"/></br>
-            <textarea class="textarea box" id="description" placeholder="A short description"></textarea>
-            <div class="box has-text-centered">
-            <button onclick="createTeam()" class="button is-link " id="createTeam">Save and grab URL</button></br>
-        </div>
+            <div class="columns">
+                <div class="column">
+                    <figure class="image is-128x128" id ="image">
+                        
+                    </figure>
+                    <input type="text" placeholder="A team name here.." id="name" class="input box" />
+                    <textarea class="textarea box" id="description" placeholder="A short description"></textarea>
+                </div>
+                <div class="cloumn box">
+                    <h3>List of members</h3>
+                    <div id='list' class="menu"></div>
+                </div>
+            </div>
         </div>
     </div>
-
 
 </body>
 
