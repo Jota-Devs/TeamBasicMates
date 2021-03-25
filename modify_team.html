@@ -22,14 +22,13 @@
         </div>
     </nav>
     <div class="hero">
-        <div class="hero-body">
-            <div class="columns">
-                <div class="column">
+        <div class="hero-body ">
+            <div class="columns is-mobile is-centered">
+                <div class="column is-half">
                     <figure class="image is-128x128" id ="image">
-                        
                     </figure>
-                    <input type="text" placeholder="A team name here.." id="name" class="input box" />
-                    <textarea class="textarea box" id="description" placeholder="A short description"></textarea>
+                    <input type="text" placeholder="A team name here.." id="name" class="input box" onblur="editName()" />
+                    <textarea class="textarea box" id="description" placeholder="A short description" onblur="editDescription()"></textarea>
                 </div>
                 <div class="cloumn box">
                     <h3>List of members</h3>

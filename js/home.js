@@ -9,7 +9,7 @@ const getUser = () => {
         querySnapshot.forEach((doc) => {
             if (doc.data().username == emailCookie) {
                 user = doc.data();
-                document.getElementById("welcome").innerHTML = "Welcome, " + user.fullName;
+                document.getElementById("welcome").innerHTML = "Welcome, " + user.fullName + " ";
                 getTeamsIOwn(user);
                 getTeamsIPartOf(user);
             }; 
@@ -40,40 +40,12 @@ const getTeamsIPartOf = (user) =>{
         element.className='columns'
         user.teams.forEach((doc) => {
             doc.get().then(res =>{
-                console.log(res.data()); 
                     element.innerHTML += "<a href ='/get_all_teams.html?id=" + res.id + " ' ><img src=" + res.data().photo + " class='images column'></a>"; 
             })
         });
 
-}
+};
 
 const createTeam = () =>{
     window.location = '/create.html';
-}
-
-
-/*var data = firebase.database().ref('accounts/');
-
-//obtengo team
-function getTeams() {
-    var team;
-    data.orderByChild('username').equalTo(emailCookie).on('value', snapshot => {
-        snapshot.forEach(function (childSnapshot) {
-
-            var value = childSnapshot.val();
-            team = value.teams.id;
-            //obtengo el team
-            var id = -1;
-            var data2 = firebase.database().ref('teams/' + team);
-            data2.on('value', function (snapshot) {
-                id = snapshot.val();
-                var element = document.createElement("div");
-                document.getElementById('thumbnails').appendChild(element);
-                element.innerHTML += "<a href ='http://127.0.0.1:5500/get_all_teams.html?id=" + team + " ' ><img src=" + id.photo + " class='images'></a>";
-            });
-
-        });
-    });
-}
-getTeams();
-*/
+};

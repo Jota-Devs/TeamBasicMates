@@ -26,11 +26,24 @@
     </nav>
     <div class="hero">
         <div class="hero-body">
-            <input type="text" placeholder="A team name here.." id="name" class="input box"/></br>
-            <textarea class="textarea box" id="description" placeholder="A short description"></textarea>
-            <div class="box has-text-centered">
-            <button onclick="createTeam()" class="button is-link " id="createTeam">Save and grab URL</button></br>
-        </div>
+            <div class="columns">
+                <div class="column is-half">
+                    
+                    <input type="text" placeholder="A team name here.." id="name" class="input box" />
+                    <textarea class="textarea box" id="description" placeholder="A short description"></textarea>
+                    <div class=" has-text-centered">
+                        <button onclick="createTeam()" class="button is-link " id="createTeam">Save and grab
+                            URL</button>
+                    </div>
+                </div>
+                <div class="column">
+                    <label for="photo">
+                    <img src="https://firebasestorage.googleapis.com/v0/b/teammatejd.appspot.com/o/images%2FCamera.svg?alt=media&token=25b95b13-5e57-4e3d-982d-8afdb9ecd11a"
+                        for="photo">
+                        <input type="file" style="display:none;" id="photo">
+                    </label>
+                </div>
+            </div>
         </div>
     </div>
 
