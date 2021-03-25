@@ -1,4 +1,33 @@
-var data = firebase.database().ref('teams/');
+var db = firebase.firestore();
+
+const createTeam = () =>{
+    let name = document.querySelector('#name').value;
+    let description = document.querySelector('#description').value;
+    db.collection("Teams").doc().set({
+        name: name,
+        description: description,
+    })
+    .then(docRef  => {
+        console.log("Document successfully written!" + docRef.id);
+    })
+    .catch((error) => {
+        console.error("Error writing document: ", error);
+    });
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*var data = firebase.database().ref('teams/');
 
 function getAll() {
     let arr = [];
@@ -62,4 +91,4 @@ function updateTeam() {
         });
         alert('the team was updated successfully');
     };
-};
+};*/

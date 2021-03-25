@@ -15,7 +15,7 @@ const listTeamMembers = () => {
                 let element = document.createElement("div");
                 document.getElementById('lc').appendChild(element);
                 element.dataset.account = x.data().username;
-                element.className = "thumbnails";
+                element.className = "thumbnails column";
                 //fix
                 thumbnails = document.querySelectorAll('.thumbnails');
                 thumbnails.forEach(function (thumbnail) {

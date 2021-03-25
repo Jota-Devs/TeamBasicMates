@@ -27,7 +27,7 @@ const getTeamsIOwn = (user) => {
         querySnapshot.forEach((doc) => {
             doc.data().owner.get().then(res => {
                 if (res.data().username == user.username) {
-                    element.innerHTML += "<a href ='/get_all_teams.html?id=" + doc.id + " ' ><img src=" + doc.data().photo + " class='images column'></a>";
+                    element.innerHTML += "<a href ='/modify_team.html?id=" + doc.id + " ' ><img src=" + doc.data().photo + " class='images column'></a>";
                 }
             });
         });
