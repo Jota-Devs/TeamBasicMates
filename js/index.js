@@ -34,7 +34,7 @@
 
   //recover password
   const recoveryPassword = () => {
-    let email = document.getElementById("email").value;
+    let email = document.getElementById("emailPassword").value;
     auth.sendPasswordResetEmail(email)
       .then(() => {
         alert("A mail was send to :" + email)
@@ -48,4 +48,18 @@
   const cleanText = () => {
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
+  }
+
+  //modal call
+  const callModal = ()=>{
+    let modal = document.querySelector('#recPass');
+    modal.className ='modal is-active';
+  }
+
+  //close modal
+  const closeModal = ()=>{
+    let modal = document.querySelector('#recPass');
+    let input = document.querySelector('#emailPassword');
+    input.value ='';
+    modal.className ='modal';
   }

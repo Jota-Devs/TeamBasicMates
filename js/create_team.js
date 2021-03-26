@@ -7,7 +7,7 @@ const createTeam = () => {
 
 };
 
-function update() {
+const update = ()=> {
     let name = document.querySelector('#name').value;
     let description = document.querySelector('#description').value;
     db.collection("Teams").doc().set({
@@ -23,7 +23,7 @@ function update() {
         });
 }
 
-function upload(up) {
+const upload = (up) => {
     const storageRef = firebase.storage().ref();
     var uploadTask = storageRef.child('images/' + up.name).put(up);
 
