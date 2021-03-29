@@ -24,13 +24,14 @@
     <div class="hero-body">
         <div class="container has-text-centered">
             <div class="column is-8 is-offset-2">
-                <h1 class="title is-1">Login</h1>
+                <h1 class="title is-1" id="loginTitle">Login</h1>
+                <h1 class="title is-1" id="signUpTitle" style="display: none;">Sign Up</h1>
                 <div class="box">
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control">
                             <input class="input" type="text" placeholder="e.g. juan@tcs.com" id="email"
-                                value="juandi.ffvii@hotmail.com" />
+                                value="juandi.ffvii@hotmail.com"/>
                         </div>
                     </div>
                     <div class="field">
@@ -40,12 +41,14 @@
                                 value="Juan1234" />
                         </div>
                     </div>
-                    <input type="submit" onclick="login()" value="Login" class="button is-small is-primary is-outlined">
+                    <input type="submit" onclick="login()" id="loginBtn" value="Login" class="button is-small is-primary is-outlined">
+                    <button onclick="signUp()" id="signUp" class="button is-small is-primary is-outlined" style="display: none;">Sign Up</button>
                 </div>
             </div>
             <div class="columns">
                 <div class="column is-3 is-offset-2">
-                    <button onclick="signUp()" id="signUp" class="button is-small is-link">signUp</button>
+                    <button onclick="changeDisplay()" id="changeDisplay" class="button is-small is-link">Sign Up</button>
+                    <button onclick="changeDisplayLogin()" id="changeDisplayLogin" class="button is-small is-link" style="display: none;">Login</button>
 
                 </div>
                 <div class="column ">

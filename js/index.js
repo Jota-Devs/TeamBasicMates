@@ -8,7 +8,7 @@
         let user = userCredential.user;
         //alert("New Account : " + user.email);
         cleanText();
-        document.cookie = "username=" + email;
+       // document.cookie = "username=" + email;
         window.location = '/home.html';
       })
       .catch((e) => {
@@ -25,7 +25,7 @@
         let user = userCredential.user;
         //alert("Account logued : " + user.email);
         cleanText();
-        document.cookie = "username=" + email;
+        //document.cookie = "username=" + email;
         window.location = '/home.html';
       }).catch((e) => {
         alert(e.message);
@@ -51,15 +51,34 @@
   }
 
   //modal call
-  const callModal = ()=>{
+  const callModal = () => {
     let modal = document.querySelector('#recPass');
-    modal.className ='modal is-active';
+    modal.className = 'modal is-active';
   }
 
   //close modal
-  const closeModal = ()=>{
+  const closeModal = () => {
     let modal = document.querySelector('#recPass');
     let input = document.querySelector('#emailPassword');
-    input.value ='';
-    modal.className ='modal';
+    input.value = '';
+    modal.className = 'modal';
+  }
+
+  const changeDisplay = () => {
+    let titleSignUP = document.querySelector('#signUpTitle');
+    titleSignUP.style = "";
+    let titleLogin = document.querySelector('#loginTitle');
+    titleLogin.style = "display: none;";
+    let btnLogin = document.querySelector('#loginBtn');
+    btnLogin.style = "display:none;";
+    let btnChange = document.querySelector('#changeDisplay');
+    btnChange.style = "display:none;";
+    let btnSignUp = document.querySelector('#signUp');
+    btnSignUp.style = '';
+    let btnRet= document.querySelector('#changeDisplayLogin');
+    btnRet.style = '';
+  }
+
+  changeDisplayLogin = () =>{
+    location.reload();
   }

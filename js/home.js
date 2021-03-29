@@ -1,13 +1,31 @@
-let userCookie = document.cookie.split(';');
-let emailCookie = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+//let userCookie = document.cookie.split(';');
+//let emailCookie = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
 const db = firebase.firestore();
+
+window.onload =  (event) => {
+    console.log('DOM fully loaded and parsed');
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          var uid = user.uid;
+          
+          // ...
+        } else {
+          // User is signed out
+          // ...
+          window.location = '/index.html';
+        }
+      });
+};
+//firebase.auth().signOut()
 
 let user;
 const getUser = () => {
     db.collection("Profiles").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-            if (doc.data().username == emailCookie) {
+            if (doc.data().username == firebase.auth().currentUser.email) {
                 user = doc.data();
                 document.getElementById("welcome").innerHTML = "Welcome, " + user.fullName + " ";
                 getTeamsIOwn(user);
@@ -48,4 +66,8 @@ const getTeamsIPartOf = (user) =>{
 
 const createTeam = () =>{
     window.location = '/create.html';
+};
+
+const logout = () =>{
+    firebase.auth().signOut();
 };
