@@ -10,9 +10,9 @@ const getTeam = () => {
         let doc = querySnapshot.data();
         let name = document.querySelector('#name');
         let description = document.querySelector('#description');
-        let image = document.querySelector('#image');
-        image.innerHTML = '<img src="' + doc.photo + ' type="file"">'
-        image.addEventListener('click',changePhoto);
+        let image = document.querySelector('#label');
+        image.innerHTML = '<img src="' + doc.photo + 'for="photo">'
+       // image.addEventListener('click',changePhoto);
         name.value = doc.name;
         description.value = doc.description;
         doc.teamMembers.forEach(element => {

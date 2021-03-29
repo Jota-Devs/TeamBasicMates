@@ -3,24 +3,16 @@
 
 const db = firebase.firestore();
 
-window.onload =  (event) => {
+/*window.onload = (event) => {
+    
     console.log('DOM fully loaded and parsed');
     firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-          var uid = user.uid;
-          
-          // ...
-        } else {
-          // User is signed out
-          // ...
-          window.location = '/index.html';
-        }
-      });
-};
-//firebase.auth().signOut()
+        if (!user) {
 
+            window.location = '/index.html';
+        } 
+    });
+};*/
 let user;
 const getUser = () => {
     db.collection("Profiles").get().then((querySnapshot) => {
@@ -30,8 +22,11 @@ const getUser = () => {
                 document.getElementById("welcome").innerHTML = "Welcome, " + user.fullName + " ";
                 getTeamsIOwn(user);
                 getTeamsIPartOf(user);
-            }; 
+            };
         });
+        if (user == undefined) {
+            window.location = '/create_acc.html';
+        }
     });
 };
 getUser();
@@ -39,7 +34,7 @@ getUser();
 const getTeamsIOwn = (user) => {
     var element = document.createElement("div");
     document.getElementById('thumbnails').appendChild(element);
-    element.className='columns'
+    element.className = 'columns'
 
     db.collection("Teams").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
@@ -52,22 +47,22 @@ const getTeamsIOwn = (user) => {
     });
 };
 
-const getTeamsIPartOf = (user) =>{
+const getTeamsIPartOf = (user) => {
     var element = document.createElement("div");
-        document.getElementById('thumbnails2').appendChild(element);
-        element.className='columns'
-        user.teams.forEach((doc) => {
-            doc.get().then(res =>{
-                    element.innerHTML += "<a href ='/get_all_teams.html?id=" + res.id + " ' ><img src=" + res.data().photo + " class='images column'></a>"; 
-            })
-        });
+    document.getElementById('thumbnails2').appendChild(element);
+    element.className = 'columns'
+    user.teams.forEach((doc) => {
+        doc.get().then(res => {
+            element.innerHTML += "<a href ='/get_all_teams.html?id=" + res.id + " ' ><img src=" + res.data().photo + " class='images column'></a>";
+        })
+    });
 
 };
 
-const createTeam = () =>{
+const createTeam = () => {
     window.location = '/create.html';
 };
 
-const logout = () =>{
+const logout = () => {
     firebase.auth().signOut();
 };

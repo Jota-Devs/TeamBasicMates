@@ -1,6 +1,20 @@
 const db = firebase.firestore();
 const storageRef = firebase.storage().ref();
 
+let userID;
+const getUserID = () => {
+    db.collection("Profiles").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            if (doc.data().username == firebase.auth().currentUser.email) {
+                userID = doc.id;
+            };
+        });
+
+    });
+};
+getUserID();
+
+
 const createTeam = () => {
     let foto = document.querySelector('#photo').files[0];
     uploadImage(foto).then((snapshot) => {
@@ -8,16 +22,23 @@ const createTeam = () => {
     });
 };
 
-const update = async (url) => {
+const update =  (url) => {
     let name = document.querySelector('#name').value;
     let description = document.querySelector('#description').value;
-    db.collection("Teams").doc().set({
+    let date = getDate();
+    db.collection("Teams").add({
             name: name,
             description: description,
-            photo: url
+            photo: url,
+            owner: db.doc("Profiles/" + userID),
+            created:date,
+            teamMembers: db.doc("Profiles/"+userID)
+
         })
-        .then(docRef => {
-            alert("the team was updated successfully");
+        .then((docRef) => {
+            alert("the team was created successfully"+ docRef);
+            cleanInputs();
+            console.log(docRef.id)
         })
         .catch((error) => {
             alert("Error creating team: ", error);
@@ -42,3 +63,18 @@ const showImage = async (file) => {
             update(url);
         });
 };
+
+const getDate = () => {
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+    let todayString = today.toDateString();
+    let month = todayString.slice(4, 7);
+    let year = todayString.slice(11, 15);
+    return month + ' ' + year;
+};
+
+const cleanInputs = ()=> {
+    document.querySelector('#name').value = '';
+    document.querySelector('#description').value = '';
+    document.querySelector('#photo').value = '';
+}
