@@ -17,25 +17,12 @@ const listTeamMembers = () => {
         });
         imag = doc.data().photo;
     });
-    console.log(membersList);
     calculateImageSize();
 };
 
-listTeamMembers();
-setTimeout(() => {
-    calculateImageSize();
-}, 2500);
-setTimeout(() => {
-    populateLogo();
-}, 2500);
-
-
-
-function getDivisibles() {
+const getDivisibles = () => {
     let imgQty = membersList.length;
     let divisible = [];
-
-    // Busco los numeros divisibles de la cantidad de imagenes
     for (var i = 1; i <= imgQty; i++) {
         if (imgQty % i == 0) {
             divisible.push(i);
@@ -44,13 +31,12 @@ function getDivisibles() {
     return divisible;
 }
 
-function checkPrimes() {
+const checkPrimes = () => {
 
     let imgQty = membersList.length;
     let divisible = getDivisibles();
 
     if (divisible.length == 2 && imgQty > 3) {
-        // Es numero primo
         membersList.push(membersList[0])
     }
 
@@ -58,13 +44,12 @@ function checkPrimes() {
 }
 
 
-function calculateImageSize() {
+const calculateImageSize = () => {
     let x = 1;
     let y = 1;
     let imgQty = membersList.length;
     let divisible = checkPrimes();
-    document.getElementById('lc').innerHTML = ''; //borrar
-
+    document.getElementById('lc').innerHTML = '';
 
     let medio = divisible[Math.round((divisible.length - 1) / 2)];
     x = medio
@@ -77,36 +62,29 @@ function calculateImageSize() {
         imageWidth = (screenWidth / columns);
         imageHeight = (screenHeight / rows);
 
-        console.log('img width: ', imageWidth, 'img height: ',
-            imageHeight, 'columns: ', columns, 'rows: ', rows);
     } else {
         columns = Math.min(x, y);
         rows = Math.max(x, y);
         imageWidth = (screenWidth / columns);
         imageHeight = (screenHeight / rows);
-
-        console.log('img width: ', imageWidth, 'img height: ',
-            imageHeight, 'columns: ', columns, 'rows: ', rows);
     }
     membersList.forEach(item => {
         populate(item, Math.floor(imageWidth), Math.floor(imageHeight));
     });
+};
 
-}
-
-function populateLogo() {
+const populateLogo = () => {
     let logo = document.createElement("div");
     document.getElementById('lc').appendChild(logo);;
     logo.innerHTML += "<img src=" + imag + " class='logo'>"
 }
 
-function populate(x, imageWidth, imageHeight) {
+const populate = (x, imageWidth, imageHeight) => {
     let element = document.createElement("div");
     document.getElementById('lc').appendChild(element);
     element.dataset.account = x.username;
     element.className = "thumbnails";
-    console.log(imageHeight, imageWidth)
-    //fix
+
     thumbnails = document.querySelectorAll('.thumbnails');
     thumbnails.forEach(function (thumbnail) {
         thumbnail.addEventListener('click', openCard);
@@ -122,7 +100,7 @@ function populate(x, imageWidth, imageHeight) {
 window.addEventListener('resize', calculateImageSize, false);
 window.addEventListener('resize', populateLogo, false);
 
-function openCard(e) {
+const openCard = (e) => {
     const card = document.querySelector('.tarjeta');
     const email = e.target.parentElement.dataset.account;
     card.classList.add('activa');
@@ -135,6 +113,7 @@ function openCard(e) {
         });
     });
 }
+
 function closeCard(e) {
     let card = document.querySelector('.tarjeta');
     let contenido = document.querySelector("#tarjeta-contenido");
@@ -142,9 +121,9 @@ function closeCard(e) {
     contenido.innerHTML = '';
 };
 
-function addContentToCard(user) {
+const addContentToCard = (user) => {
     let contenido = document.querySelector("#tarjeta-contenido");
-    contenido.innerHTML = ' <div class="card"> <img src=' + user.photo + ' class="cardPhoto" > <div>' + user.username + '</div> </div>';
+    contenido.innerHTML = ' <div class="card"> <img src=' + user.photo + ' class="cardPhoto" > <div>' + user.fullName + '</div> </div>';
     let social = document.querySelector("#social");
     social.innerHTML = `<ul>
     <li><a href="http://facebook.com/"><i class="fa fa-facebook"></i></a></li>
@@ -152,3 +131,11 @@ function addContentToCard(user) {
     <li><a href="http://twitter.com/"><i class="fa fa-twitter"></i></a></li>
     </ul>`;
 };
+
+listTeamMembers();
+setTimeout(() => {
+    calculateImageSize();
+}, 2500);
+setTimeout(() => {
+    populateLogo();
+}, 2500);

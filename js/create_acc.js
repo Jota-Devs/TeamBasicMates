@@ -40,6 +40,8 @@ const update = (url) => {
         })
         .then((docRef) => {
             alert("the team was profile successfully");
+            document.cookie = "username=" + fullName;
+            window.location = '/home.html';
 
         })
         .catch((error) => {

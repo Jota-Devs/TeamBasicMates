@@ -26,7 +26,7 @@ const getTeam = () => {
         //image.addEventListener('click',changePhoto);
         name.value = doc.name;
         description.value = doc.description;
-        ul.innerHTML ='';
+        ul.innerHTML = '';
         doc.teamMembers.forEach(element => {
             element.get().then(res => {
                 createList(res);
@@ -111,4 +111,37 @@ const update = (url) => {
         .catch((error) => {
             alert("Error creating team: ", error);
         });
+};
+
+const getProfiles = () => {
+    let profiles = [];
+
+    db.collection('Profiles').get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            let res = doc;
+            profiles.push(res);
+        });
+    }).then(() => {
+        populateSelect(profiles);
+    });
+};
+getProfiles();
+const populateSelect = (profiles) => {
+    var select = document.querySelector("#request");
+    var options = profiles;
+    select.innerHTML = "";
+    for (var i = 0; i < options.length; i++) {
+        var opt = options[i];
+        select.innerHTML += "<option value=\"" + opt.id + "\">" + opt.data().fullName + "</option>";
+    };
+};
+
+const sendInvitation = () => {
+    let select = document.querySelector('#request').value;
+    db.doc('Profiles/' + select).update({
+        teams: firebase.firestore.FieldValue.arrayUnion(db.doc("Teams/" + id))
+    });
+    db.doc('Teams/' + id).update({
+        teamMembers:firebase.firestore.FieldValue.arrayUnion(db.doc("Profiles/" + select))
+    });
 };
