@@ -2,24 +2,15 @@
 //let emailCookie = document.cookie.replace(/(?:(?:^|.*;\s*)username\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
 const db = firebase.firestore();
-
-/*window.onload = (event) => {
-    
-    console.log('DOM fully loaded and parsed');
-    firebase.auth().onAuthStateChanged((user) => {
-        if (!user) {
-
-            window.location = '/index.html';
-        } 
-    });
-};*/
 let user;
+
 const getUser = () => {
     db.collection("Profiles").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             if (doc.data().username == firebase.auth().currentUser.email) {
                 user = doc.data();
                 document.getElementById("welcome").innerHTML = "Welcome, " + user.fullName + " ";
+                document.cookie = "username=" + user.fullName;
                 getTeamsIOwn(user);
                 getTeamsIPartOf(user);
             };
@@ -29,6 +20,7 @@ const getUser = () => {
         }
     });
 };
+
 getUser();
 
 const getTeamsIOwn = (user) => {
@@ -63,6 +55,3 @@ const createTeam = () => {
     window.location = '/create.html';
 };
 
-const logout = () => {
-    firebase.auth().signOut();
-};

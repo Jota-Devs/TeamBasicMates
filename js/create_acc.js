@@ -1,31 +1,48 @@
-var data = firebase.database().ref('accounts/');
-
-let autoId = 0;
-data.orderByKey().limitToLast(1).on('value', snapshot => {
-    autoId = Object.keys(snapshot.val())[0];
-});
+const db = firebase.firestore();
+const storageRef = firebase.storage().ref();
 
 
-function createAcc(){
-    let email = document.getElementById('email').value;
-    let teamId = document.getElementById('team').value;
-    let status = document.getElementById('status').value;
-    let photo = document.getElementById('photo').files[0];
-    data.child(parseInt(autoId) +1).set({
-        username:email,
-        teams:{
-            id:parseInt(teamId)
-        },
-        status: status,
-        photo:"https://firebasestorage.googleapis.com/v0/b/teammatejd.appspot.com/o/images%2Fman.jpg?alt=media&token=b838aded-2747-4eed-898f-6b8cbf0f14c6"
+const createAcc = () => {
+
+    let photo = document.querySelector('#photo').files[0];
+    uploadImage(photo).then((snapshot) => {
+        showImage(photo);
     });
-    alert('the account was created');
 };
 
-function deleteAcc(){
-    let id = document.getElementById('accId').value;
-    if (id != '') {
-        firebase.database().ref('accounts/' + id).remove();
-        alert('the team was removed successfully');
-    };
-}
+const uploadImage = async (file) => {
+    let imagesRef = storageRef.child('images/' + file.name);
+    let promise = new Promise((resolve, reject) => {
+        imagesRef.put(file).then((snapshot) => {
+            resolve(snapshot);
+        }).catch((e) => {
+            reject(e)
+        });
+    });
+    return await (promise);
+};
+
+const showImage = async (file) => {
+    storageRef.child('images/' + file.name).getDownloadURL()
+        .then((url) => {
+            update(url);
+        });
+};
+
+const update = (url) => {
+    let status = document.querySelector('#status').value;
+    let fullName = document.querySelector('#fullName').value;
+    db.collection("Profiles").add({
+            fullName: fullName,
+            photo: url,
+            status: status,
+            username: firebase.auth().currentUser.email
+        })
+        .then((docRef) => {
+            alert("the team was profile successfully");
+
+        })
+        .catch((error) => {
+            alert("Error creating team: ", error);
+        });
+};

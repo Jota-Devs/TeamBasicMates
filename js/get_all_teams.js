@@ -15,7 +15,7 @@ const listTeamMembers = () => {
                 let element = document.createElement("div");
                 document.getElementById('lc').appendChild(element);
                 element.dataset.account = x.data().username;
-                element.className = "thumbnails column";
+                element.className = "thumbnails";
                 //fix
                 thumbnails = document.querySelectorAll('.thumbnails');
                 thumbnails.forEach(function (thumbnail) {
@@ -36,7 +36,7 @@ const listTeamMembers = () => {
     });
 };
 
-listTeamMembers();
+
 /*const populatePage = () => {
 
    

@@ -6,10 +6,10 @@ const getUserID = () => {
     db.collection("Profiles").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             if (doc.data().username == firebase.auth().currentUser.email) {
+                document.getElementById("welcome").innerHTML = "Welcome, " + doc.data().fullName + " ";
                 userID = doc.id;
             };
         });
-
     });
 };
 getUserID();
@@ -32,13 +32,13 @@ const update =  (url) => {
             photo: url,
             owner: db.doc("Profiles/" + userID),
             created:date,
-            teamMembers: db.doc("Profiles/"+userID)
+            teamMembers: firebase.firestore.FieldValue.arrayUnion(db.doc("Profiles/"+userID))
 
         })
         .then((docRef) => {
             alert("the team was created successfully"+ docRef);
             cleanInputs();
-            console.log(docRef.id)
+            addTeamToUser(docRef.id);
         })
         .catch((error) => {
             alert("Error creating team: ", error);
@@ -77,4 +77,11 @@ const cleanInputs = ()=> {
     document.querySelector('#name').value = '';
     document.querySelector('#description').value = '';
     document.querySelector('#photo').value = '';
+}
+
+const addTeamToUser = (teamID) => {
+    let userRef = db.collection("Profiles").doc(userID);
+    userRef.update({
+        teams: firebase.firestore.FieldValue.arrayUnion(db.doc("Teams/"+teamID))
+    });
 }

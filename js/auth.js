@@ -5,3 +5,8 @@ window.onload = (event) => {
         } 
     });
 };
+
+const logout = () => {
+    firebase.auth().signOut();
+    document.cookie = "username= ''"
+};
